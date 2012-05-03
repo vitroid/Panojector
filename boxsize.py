@@ -4,8 +4,8 @@ width = 4000 #3000.0
 height = width / 2
 #x = [443.0, 1143.0, 1855.0, 2654.0] #//y axis of the four corners, in picture coord
 #y = [485., 986.] #// x axis of the first column, in pucture coord
-x = [494,1489,2487,3485] #//y axis of the four corners, in picture coord
-y = [649,1183] #// x axis of the first column, in pucture coord
+x = [538,1432,2541,3445] #//y axis of the four corners, in picture coord
+y = [772,1247] #// x axis of the first column, in pucture coord
 #//four corners must be vertically aligned.
 #296,1303,1702,2709
 #346,776
@@ -71,10 +71,10 @@ theta = [(height/2-y[0])*pi/height,
 h1 = l*tan(theta[0])
 h2 = l*tan(theta[1])
 #print p,q,r,h1,h2
-print "./panojector -s %s imagefile.jpg box" % int(width),
-print "-b %s,%s,%s" % (1,q+r,h1+h2),
+print "./panojector -s %s imagefile.jpg" % int(width),
+print "box -b %s,%s,%s" % (1,q+r,h1+h2),
 print "-e %s,%s,%s" % (p,q/(q+r),h2/(h1+h2)),
-print "-x %s" % (x[0]*2.0/width)
+print "slide -x %s" % (x[0]*2.0/width)
 
             
         
