@@ -1,18 +1,14 @@
+#!/usr/bin/env python
 from math import *
 #this works very well.
-width = 4000 #3000.0
+import sys
+args = map(float,tuple(sys.argv[1:8]))
+width = args[0]     # 1st argument: width of the image
+x     = args[1:5]   # 2nd-5th args: x positions of the corners.
+y     = args[5:7]   # 6th-7th args: y positions of the ceiling and floor at the 1st corner.
+
 height = width / 2
-#x = [443.0, 1143.0, 1855.0, 2654.0] #//y axis of the four corners, in picture coord
-#y = [485., 986.] #// x axis of the first column, in pucture coord
-x = [538,1432,2541,3445] #//y axis of the four corners, in picture coord
-y = [772,1247] #// x axis of the first column, in pucture coord
-#//four corners must be vertically aligned.
-#296,1303,1702,2709
-#346,776
-#525,1520,2489,3491
-#624,1199
-#494,1489,2487,3485
-#493,1183
+
 def angles(param):
     p,q,r=param
     a1 = atan(p/q)+atan((1-p)/q)
