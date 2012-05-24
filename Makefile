@@ -7,6 +7,7 @@ LDFLAGS=-lcv -lhighgui
 endif
 CXX=g++ -O6 #-Isrc #-g
 TARGETS=panojector
+SO=terminate.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so mercator.so tile.so tile2.so equirectangular.so rotate.so tilt.so tumblerfan.so stereographic.so prism.so cone.so swap.so
 all: $(TARGETS)
 clean:
 	-rm $(TARGETS) *.o *~ *.so
@@ -17,6 +18,7 @@ memo:
 SO=terminate.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so mercator.so tile.so tile2.so equirectangular.so rotate.so tilt.so tumblerfan.so stereographic.so prism.so cone.so swap.so
 OBJS=$(patsubst %.so, %.o, $(SO))
 panojector: panojector.o plugin.o $(SO) $(OBJS)
+panojector: panojector.o plugin.o 
 	$(CXX) $(CXXFLAGS)  panojector.o plugin.o -o $@ $(LDFLAGS)
 %.so: %.o
 	$(CXX) -shared $< plugin.o -o $@

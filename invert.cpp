@@ -1,4 +1,5 @@
 #include "plugin.hpp"
+#include <complex>
 
 class Invert : public Projector {
 protected:

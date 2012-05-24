@@ -4,6 +4,8 @@
 #include <opencv/highgui.h>
 #include <ctype.h>
 #include <dlfcn.h>
+#include <complex>
+using namespace std;
 
 class Projector
 {
