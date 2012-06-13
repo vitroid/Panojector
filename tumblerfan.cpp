@@ -43,12 +43,12 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float radius = sqrt(dstx*dstx + (dsty+r0)*(dsty+r0));
     float alpha  = atan(dstx/(dsty+r0));
     if ( abs(alpha) < alphamax && radius > r0 && radius < (r0 + height) ){
-      return child->map( -r0*alpha*scal, -(r0*log(radius/r0)*scal), srcx,srcy );
+      return child->map( -r0*alpha*scal, -(r0*log(radius/r0)*scal) );
     }
     else{
       return 0;

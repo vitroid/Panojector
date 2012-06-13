@@ -36,12 +36,12 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     complex<float> dst(dstx/A,dsty/A);
     complex<float> one(1.0,0.0);
     complex<float> src = one / dst;
-    return child->map( src.real(), src.imag(), srcx, srcy );
+    return child->map( src.real(), src.imag());
   }
 };
 

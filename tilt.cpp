@@ -37,7 +37,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float psi = dstx * M_PI;
     float theta = dsty * M_PI;
@@ -54,7 +54,7 @@ public:
     if ( y1 < 0.0 ){
       psi1 = - psi1;
     }
-    return child->map( psi1/M_PI, theta1/M_PI, srcx, srcy );
+    return child->map( psi1/M_PI, theta1/M_PI );
   }
 };
 

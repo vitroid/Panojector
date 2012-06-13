@@ -59,7 +59,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     dsty += 1.0;
     int dan = (int)floor( dsty / bw);
@@ -181,7 +181,7 @@ public:
     sx -= floor( sx / stripw + 0.5)*stripw;
     sx = sx*2.0 / stripw;
     sy = sy*2.0 / stripw;
-    return child->map( sx, sy, srcx, srcy );
+    return child->map( sx, sy );
   }
 };
 

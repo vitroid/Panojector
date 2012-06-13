@@ -56,7 +56,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     dstx /= x;
     if ( pad ){
@@ -66,7 +66,7 @@ public:
 	dstx = 1.0;
     }
     dsty /= y;
-    return child->map(dstx,dsty,srcx,srcy);
+    return child->map(dstx,dsty);
   }
 };
 

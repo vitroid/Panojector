@@ -11,7 +11,7 @@ class Projector
 {
 public:
   Projector(){};
-  virtual int map(float dstx, float dsty, float& srcx, float& srcy) const = 0;
+  virtual uchar* map(float dstx, float dsty) = 0;
 };
 
 

@@ -42,7 +42,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float h,v; // horizontal and vertical angles
     
@@ -98,7 +98,7 @@ public:
 	return 0;
       }
     }
-    return child->map( dstx, dsty, srcx, srcy );
+    return child->map( dstx, dsty );
   }
 };
 

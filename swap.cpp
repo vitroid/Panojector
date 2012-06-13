@@ -40,7 +40,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     if ( dsty > 0.5 || dsty < -0.5 ){
       return 0;
@@ -57,7 +57,7 @@ public:
     }
     //recover angles
     cartesian2spherical(x,y,z, phi, theta);
-    return child->map( phi / M_PI, theta / M_PI, srcx, srcy );
+    return child->map( phi / M_PI, theta / M_PI );
   }
 };
 

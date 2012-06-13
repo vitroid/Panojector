@@ -35,13 +35,13 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     complex<float> dst(dstx/A,dsty/A);
     complex<float> pi(M_PI,0.0);
     //complex<float> eye(0,1);//makes source vertical
     complex<float> src = log(dst)/ pi; // * eye;
-    return child->map( src.real(), src.imag(), srcx, srcy );
+    return child->map( src.real(), src.imag() );
   }
 };
 

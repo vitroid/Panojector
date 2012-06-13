@@ -12,14 +12,15 @@ Projector* plugin_load(int argc, char* argv[]) {
   // load the projector library
   char plugin_name[1000];
   if ( argc == 0 ){
-    sprintf(plugin_name, "./terminate.so");
+    cerr << "Open chain." << endl;
+    return NULL;
   }
   else{
     sprintf(plugin_name, "./%s.so", argv[0]);
   }
   void* projector = dlopen(plugin_name, RTLD_LAZY);
   if (!projector) {
-    cerr << "Cannot load library: " << dlerror() << '\n';
+    cerr << "Cannot load library: " << dlerror() << endl;
     return NULL;
   }
   

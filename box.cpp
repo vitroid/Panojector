@@ -43,7 +43,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     // in image coord (2(a+b) x 2(a+b))
     dstx *= (boxx+boxy);
@@ -134,7 +134,7 @@ public:
     else{
       return 0;
     }
-    return child->map( dstx, dsty, srcx, srcy );
+    return child->map( dstx, dsty );
   }
 };
 

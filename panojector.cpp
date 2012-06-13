@@ -5,27 +5,26 @@
 using namespace std;
 
 
-IplImage* scan( int size, IplImage* const src, const Projector& projector )
+IplImage* scan( int size, Projector& projector )
 {
   IplImage* dst = cvCreateImage( cvSize(size, size), IPL_DEPTH_8U, 3 );
-  IplImage* subpix = cvCreateImage( cvSize(2,2), IPL_DEPTH_8U, 3 );
   for(int y=0;y<size;y++){
     for(int x=0;x<size;x++){
-      for(int dy=0;dy<2;dy++){
-	for(int dx=0;dx<2;dx++){
-	  float rx = 2.0*(x+dx) / size - 1.0;
-	  float ry = 2.0*(y+dy) / size - 1.0;
-	  float sx,sy;
-	  if ( projector.map(rx,ry,sx,sy) )
-	    getpixel(src,sx,sy,subpix,dx,dy);
-	  else
-	    white(subpix,dx,dy);
+      float rx = (float)x*2 / size - 1.0;
+      float ry = (float)y*2 / size - 1.0;
+      uchar* pixel = projector.map(rx,ry);
+      if ( pixel ){
+	for ( int ch=0; ch<3; ch++ ){
+	  dst->imageData[dst->widthStep * y + x * 3 + ch] = pixel[ch];
 	}
       }
-      average(subpix, dst,x,y);
+      else{
+	for ( int ch=0; ch<3; ch++ ){
+	  dst->imageData[dst->widthStep * y + x * 3 + ch] = 255;
+	}
+      }
     }
   }
-  cvReleaseImage( &subpix );
   return dst;
 }
 
@@ -35,9 +34,10 @@ IplImage* scan( int size, IplImage* const src, const Projector& projector )
 
 void usage( int argc, char* argv[] )
 {
-    fprintf( stderr, "Usage: %s [-s x] inputfilename [projectors]\n", argv[0] );
+    fprintf( stderr, "Usage: %s [-s x][-o outputfilename] [projectors]\n", argv[0] );
     fprintf( stderr, "Options:\n" );
     fprintf( stderr, "\t-s 400\tPicture size.\n" ); 
+    fprintf( stderr, "\t-o pano.jpg\tFilename to be output.\n" ); 
     exit(1);
 }
 
@@ -47,12 +47,19 @@ void usage( int argc, char* argv[] )
 
 int main( int argc, char* argv[] ){
   int width=400;
-
+  char dstfilename[1000];
+  strcpy( dstfilename, "pano.jpg" );
+  
   int c = 1;
   while ( c < argc ){
     if ( 0 == strcmp( argv[c], "-s" )){
       c++;
       width = atoi( argv[c] );
+      c++;
+    }
+    if ( 0 == strcmp( argv[c], "-o" )){
+      c++;
+      strcpy( dstfilename, argv[c] );
       c++;
     }
     else if ( argv[c][0] == '-' ){
@@ -64,15 +71,8 @@ int main( int argc, char* argv[] ){
   }
   argv += c;
   argc -= c;
-  char dstfilename[1000];
-  sprintf( dstfilename, "%s_proj.jpg", *argv );
-  IplImage* src = cvLoadImage( *argv, CV_LOAD_IMAGE_COLOR );
-  fprintf( stderr, "%s\n", *argv );
-  argv += 1;
-  argc -= 1;
   Projector* projector = plugin_load( argc, argv );
-  IplImage* dst = scan( width, src, *projector );
+  IplImage* dst = scan( width, *projector );
   cvSaveImage( dstfilename, dst );
-  cvReleaseImage (&src);
   cvReleaseImage (&dst);
 }

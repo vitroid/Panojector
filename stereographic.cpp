@@ -36,7 +36,7 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float L = 2.0*lmax*sqrt(dstx*dstx + dsty*dsty);
     float theta = M_PI/2.0 - 2.0 * atan( L / 2.0 );
@@ -56,7 +56,7 @@ public:
     phi -= floor( phi / (2.0*M_PI) + 0.5 ) * (2.0*M_PI);
     theta /= M_PI;
     phi   /= M_PI;
-    return child->map( phi, theta, srcx, srcy );
+    return child->map( phi, theta );
   }
 };
 

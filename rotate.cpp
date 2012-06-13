@@ -37,9 +37,9 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
-    return child->map( dstx*cos(th)+dsty*sin(th), -dstx*sin(th)+dsty*cos(th), srcx, srcy );
+    return child->map( dstx*cos(th)+dsty*sin(th), -dstx*sin(th)+dsty*cos(th) );
   }
 };
 

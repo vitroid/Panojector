@@ -19,11 +19,11 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float tx    = dstx;
     float ty    = 2.0*atan(exp(dsty*M_PI))/M_PI - 0.5;
-    return child->map(tx,ty,srcx,srcy);
+    return child->map(tx,ty);
   }
 };
 

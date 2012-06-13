@@ -57,18 +57,17 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  int map(float dstx, float dsty, float& srcx, float& srcy) const
+  uchar* map(float dstx, float dsty)
   {
     float sx = dstx*e1x + dsty*e1y;
     float sy = dstx*e2x + dsty*e2y;
     float dy = floor( sy / h + 0.5 );
     sy -= h*dy;
     sx += (L-offset)*dy;
-    //cout << srcy << ":" << h<< endl;
     sx = sx / h * aspect * 2.0;
     sy = sy / h * aspect * 2.0;
     sx -= floor( sx/2.0 + 0.5 )*2.0;
-    return child->map( sx, sy, srcx, srcy );
+    return child->map( sx, sy );
   }
 };
 
