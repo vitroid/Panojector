@@ -1,4 +1,6 @@
 #include "plugin.hpp"
+#include <iostream>
+
 
 class Tilt : public Projector {
 protected:
@@ -49,7 +51,11 @@ public:
     float z1 =-y*sin(a) + z*cos(a);
     float theta1 = asin(z1);
     float r = sqrt(1.0-z1*z1);
-    float psi1 = acos(x1/r);
+    float x1r = x1/r;
+    float psi1 = acos(x1r);
+    if ( x1r > 1.0 ){
+      psi1 = 0.0;
+    }
     //printf("%f %f %f %f\n",psi,theta,psi1,theta1);
     if ( y1 < 0.0 ){
       psi1 = - psi1;

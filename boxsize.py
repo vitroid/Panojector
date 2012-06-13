@@ -67,10 +67,11 @@ theta = [(height/2-y[0])*pi/height,
 h1 = l*tan(theta[0])
 h2 = l*tan(theta[1])
 #print p,q,r,h1,h2
-print "./panojector -s %s imagefile.jpg" % int(width),
+print "./panojector -s %s" % int(width),
 print "box -b %s,%s,%s" % (1,q+r,h1+h2),
 print "-e %s,%s,%s" % (p,q/(q+r),h2/(h1+h2)),
-print "slide -x %s" % (x[0]*2.0/width)
+print "slide -x %s" % (x[0]*2.0/width),
+print "interpolate equi.jpg"
 
             
         
