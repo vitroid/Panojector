@@ -3,6 +3,7 @@
 *.so
 .DS_Store
 panojector
-*.jpg
-*.pdf
-*.png
+
+pano.log
+
+pano.jpg
