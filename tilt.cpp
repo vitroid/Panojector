@@ -53,7 +53,7 @@ public:
     float r = sqrt(1.0-z1*z1);
     float x1r = x1/r;
     float psi1 = acos(x1r);
-    if ( x1r > 1.0 ){
+    if ( x1r > 1.0 || x1r < -1.0 ){
       psi1 = 0.0;
     }
     //printf("%f %f %f %f\n",psi,theta,psi1,theta1);
