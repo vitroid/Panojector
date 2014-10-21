@@ -6,7 +6,7 @@
 using namespace std;
 
 
-IplImage* scan( int size, Projector& projector )
+IplImage* scan( int size, Projector& projector, int rgb[3] )
 {
   IplImage* dst = cvCreateImage( cvSize(size, size), IPL_DEPTH_8U, 3 );
   const int super = 3;
@@ -25,7 +25,7 @@ IplImage* scan( int size, Projector& projector )
 	  }
 	  else{
 	    for ( int ch=0; ch<3; ch++ ){
-	      subpix->imageData[subpix->widthStep * y + x * 3 + ch] = 255;
+	      subpix->imageData[subpix->widthStep * dy + dx * 3 + ch] = rgb[ch];
 	    }
 	  }
 	}
@@ -43,9 +43,10 @@ IplImage* scan( int size, Projector& projector )
 
 void usage( int argc, char* argv[] )
 {
-    fprintf( stderr, "Usage: %s [-s x][-o outputfilename] [projectors]\n", argv[0] );
+    fprintf( stderr, "Usage: %s [-s x][-b r,g,b][-o outputfilename] [projectors]\n", argv[0] );
     fprintf( stderr, "Options:\n" );
     fprintf( stderr, "\t-s 400\tPicture size.\n" ); 
+    fprintf( stderr, "\t-b 1,0.5,0.5\tBackground color in RGB intensities.\n" ); 
     fprintf( stderr, "\t-o pano.jpg\tFilename to be output.\n" ); 
     exit(1);
 }
@@ -57,7 +58,8 @@ void usage( int argc, char* argv[] )
 int main( int argc, char* argv[] ){
   int width=400;
   char dstfilename[1000];
-  
+  int rgb[] = {127,127,255,};//bgr
+
   strcpy( dstfilename, "pano.jpg" );
 
   std::ofstream to("pano.log");
@@ -75,9 +77,18 @@ int main( int argc, char* argv[] ){
       width = atoi( argv[c] );
       c++;
     }
-    if ( 0 == strcmp( argv[c], "-o" )){
+    else if ( 0 == strcmp( argv[c], "-o" )){
       c++;
       strcpy( dstfilename, argv[c] );
+      c++;
+    }
+    else if ( 0 == strcmp( argv[c], "-b" )){
+      float r,g,b;
+      c++;
+      sscanf(argv[c], "%f,%f,%f", &r,&g,&b);
+      rgb[0] = b * 255;
+      rgb[1] = g * 255;
+      rgb[2] = r * 255;
       c++;
     }
     else if ( argv[c][0] == '-' ){
@@ -90,7 +101,7 @@ int main( int argc, char* argv[] ){
   argv += c;
   argc -= c;
   Projector* projector = plugin_load( argc, argv );
-  IplImage* dst = scan( width, *projector );
+  IplImage* dst = scan( width, *projector, rgb );
   cvSaveImage( dstfilename, dst );
   cvReleaseImage (&dst);
 }

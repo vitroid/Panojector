@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-
+#include <iostream> //for debug
 class Box : public Projector {
 protected:
   float boxx,boxy,boxz,eyex,eyey,eyez;
@@ -132,6 +132,7 @@ public:
       dsty = v / M_PI; 
     }
     else{
+      //return child->map( 0,0 );
       return 0;
     }
     return child->map( dstx, dsty );

@@ -6,6 +6,10 @@ args = map(float,tuple(sys.argv[1:8]))
 width = args[0]     # 1st argument: width of the image
 x     = args[1:5]   # 2nd-5th args: x positions of the corners.
 y     = args[5:7]   # 6th-7th args: y positions of the ceiling and floor at the 1st corner.
+for i in range(0,3):
+    if x[i] > x[i+1]:
+        x[i+1] += width
+
 
 height = width / 2
 

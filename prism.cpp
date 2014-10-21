@@ -40,7 +40,7 @@ public:
       }
       else if ( 0 == strcmp( argv[c], "-h" )){
 	c++;
-	height = atoi( argv[c] );
+	height = atof( argv[c] );
 	c++;
       }
       else if ( 0 == strcmp( argv[c], "-z" )){
