@@ -7,3 +7,8 @@ panojector
 pano.log
 
 pano.jpg
+test/
+build/
+*.png
+*.tif
+*.log

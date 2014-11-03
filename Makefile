@@ -5,7 +5,6 @@ endif
 ifeq "Linux" "$(UNAME)"
 LDFLAGS=-lcv -lhighgui
 endif
-CXX=g++ -O6 #-Isrc #-g
 SO=load.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so mercator.so tile.so tile2.so equirectangular.so rotate.so tilt.so tumblerfan.so stereographic.so prism.so cone.so swap.so interpolate.so
 TARGETS=panojector $(SO)
 all: $(TARGETS)

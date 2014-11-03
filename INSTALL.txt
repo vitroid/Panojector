@@ -2,4 +2,5 @@ Note it's an Alpha version of the software.
 Contributions are welcome.
 
 OpenCV is required to commpile it.
-I tested it only on MacOSX Lion (10.7).
+I installed it using HomeBrew. (http://brew.sh)
+I tested it on MacOSX Lion (10.7) and Yosemite (10.10).
