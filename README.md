@@ -1,4 +1,4 @@
-(I am opdating the document. Old PDF document is [here](http://dl.dropbox.com/u/972778/panojector/plugins.pdf))
+(I am updating the document. Old better PDF document is [here](http://dl.dropbox.com/u/972778/panojector/plugins.pdf))
 #Panojector
 Panojector command accepts a few options.
 
