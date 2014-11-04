@@ -1,5 +1,7 @@
 (I am updating the document. Old better PDF document is [here](http://dl.dropbox.com/u/972778/panojector/plugins.pdf))
-#Plugin specs
+#Panojector Manual
+Panojector is a modular panorama image converter.
+##Plugin specs
 <table>
 <tr>
 <th></th>
@@ -231,7 +233,7 @@
 </tr>
 </table>
 
-#Panojector
+##Panojector command
 Panojector command accepts a few options.
 
 ###Usage:
@@ -242,7 +244,7 @@ Panojector command accepts a few options.
 `	-s n	   Set image size to n x n.`
 
 `      -o file  Specify the output file name.`
-#Notes
+##Notes
 Plugin describes how to project the `(-1..+1)x(-1..+1)` plane onto another `(-1..+1)x(-1..+1)` plane. You can apply these projection plugins to the original image by giving plugin(s) as an argument(s) of the panojector command.
 
 For example,
@@ -257,8 +259,8 @@ converts an Mercator panorama into equirectangular panorama and then develops as
 
 When multiple plugins are given, they work as a pipeline.  Each plugin accepts options as its argument. Note that x coordinate points to the right, while y coordinate directs downwards. For complex coordinate, real points to the right, and imaginary directs downwards.
 
-#Other Examples
-##Example 1
+##Other Examples
+###Example 1
 This converts the sample rectangular image to a swirl:
 
 `./panojector -s 600 stereographic equirectangular tile2 -a 706/881 load sample.jpg`
@@ -268,12 +270,12 @@ This converts the inverted little planet image back to equirectangular panorama:
 
 `./panojector -s 1000 slide -x 1.25 equirectangular rotate -a 90 slide -x -0.25 exponential load sample2.jpg`
 
-##Example 2
+###Example 2
 This converts a long train image to 6-story ribbon:
 
 `./panojector -s 1000 ribbon -a 826/29999 -s 6 load sample3.jpg`
 
-##Example 3
+###Example 3
 This converts the same image into a swirl:
 
 `./panojector -s 1000 stereographic equirectangular tile -a 826/29999 -s 8 load sample3.jpg`
@@ -282,13 +284,13 @@ and a tilted swirl:
 
 `./panojector -s 1000 rotate -a 45 stereographic -a 300 tilt -a 30 equirectangular tile -a 826/29999 -s 8 load sample3.jpg`
 
-##Example 4
+###Example 4
 You can even “Create Your Own Starbucks Tumbler.”
 
 `./panojector -s 1000 tumblerfan -s 214,173,163 tile -a 826/29999 -s 8 load sample3.jpg`
 
-##Example 5
-A small utility boxsize.py calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room:
+###Example 5
+A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room:
 
 1. Measure the dimensions of the images: picture width, positions of four corners, and ceiling and floor positions at the first corner. 
 
