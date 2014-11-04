@@ -266,10 +266,12 @@ This converts the sample rectangular image to a swirl:
     ./panojector -s 600 stereographic equirectangular tile2 -a 706/881 load sample.jpg
 
 The first plugin “tile2” tiles the original image, second plugin “equirectangular” regards the image as a Mercator (conformal) panorama and convert it into equirectangular panorama image, and the last plugin “stereographic” converts the equirectangular panorama into stereographic (conformal) image.
+
 This converts the inverted little planet image back to equirectangular panorama:
 
     ./panojector -s 1000 slide -x 1.25 equirectangular rotate -a 90 slide -x -0.25 exponential load sample2.jpg
 
+(The sample image is provided by Pedro Moura Pinheiro at http://www.flickr.com/photos/pedromourapinheiro/4929306871 under Creative Commons (CC BY-NC-SA 2.0) License.)
 ###Example 2
 This converts a long train image to 6-story ribbon:
 
@@ -290,7 +292,7 @@ You can even “Create Your Own Starbucks Tumbler.”
     ./panojector -s 1000 tumblerfan -s 214,173,163 tile -a 826/29999 -s 8 load sample3.jpg
 
 ###Example 5
-A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room:
+A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room. (The sample image is provided in a courtesy of Simon Sherwin. Original photo is available at [Flickr](https://www.flickr.com/photos/simons/4524005292).  Please download the [original image](https://farm5.staticflickr.com/4051/4524005292_5c0c99cffa_o.jpg) by yourself and rename it as `sample4.jpg`.)
 
 1. Measure the dimensions of the images: picture width, positions of four corners, and ceiling and floor positions at the first corner. 
 
