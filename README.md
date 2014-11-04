@@ -6,15 +6,17 @@
 <th>explanation</th>
 <th>input</th>
 <th>output</th>
-<th>options / argument</th>
+<th colspan="2">options / argument</th>
 </tr>
 
 <tr>
-<td>box	Develop a box</td>
+<td>box</td>
+<td>Develop a box</td>
 <td>equirectangular</td>
 <td>plain image</td>
-<td>`-b x,y,z` aspect ratio of the box<br />
-`-e x,y,z` eye position</td>
+<td>-b x,y,z<br />-e x,y,z</td>
+<td>aspect ratio of the box<br />
+ eye position</td>
 </tr>
 
 <tr>
