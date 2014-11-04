@@ -241,9 +241,9 @@ Panojector command accepts a few options.
 
 ###Options:
 
-    -s n`	   Set image size to n x n.
+    -s n	   Set image size to n x n.
 
-    `-o file`  Specify the output file name.
+    -o file  Specify the output file name.
 ##Notes
 Plugin describes how to project the `(-1..+1)x(-1..+1)` plane onto another `(-1..+1)x(-1..+1)` plane. You can apply these projection plugins to the original image by giving plugin(s) as an argument(s) of the panojector command.
 
