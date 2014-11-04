@@ -1,4 +1,192 @@
 (I am updating the document. Old better PDF document is [here](http://dl.dropbox.com/u/972778/panojector/plugins.pdf))
+#Plugin specs
+<table>
+<tr>
+<th></th>
+<th>explanation</th>
+<th>input</th>
+<th>output</th>
+<th>options / argument</th>
+</tr>
+
+<tr>
+<td>box	Develop a box</td>
+<td>equirectangular</td>
+<td>plain image</td>
+<td>`-b x,y,z` aspect ratio of the box<br />
+`-e x,y,z` eye position</td>
+</tr>
+
+<tr>
+<td>cone</td>
+<td>Develop a cone</td>
+<td>equirectangular</td>
+<td>plain image</td>
+<td>"-r 0.3		radius of the base
+-e 0.2		eye height to cone height"</td>
+</tr>
+
+<tr>
+<td>equirectangular</td>
+<td>Mercator to equirect</td>
+<td>Mercator</td>
+<td>equirectangular</td>
+<td>No option</td>
+</tr>
+
+<tr>
+<td>exponential</td>
+<td>exponential</td>
+<td>complex (plain image)</td>
+<td>complex (plain image)</td>
+<td>No option</td>
+</tr>
+
+<tr>
+<td>invert</td>
+<td>invert</td>
+<td>complex (plain image)</td>
+<td>complex (plain image)</td>
+<td>No option</td>
+</tr>
+
+<tr>
+<td>log</td>
+<td>log</td>
+<td>complex (plain image)</td>
+<td>complex (plain image)</td>
+<td>No option</td>
+</tr>
+
+<tr>
+<td>mercator</td>
+<td>Equirect to Mercator</td>
+<td>equirectangular</td>
+<td>Mercator</td>
+<td>No option</td>
+</tr>
+
+<tr>
+<td>power</td>
+<td>power</td>
+<td>complex (plain image)</td>
+<td>complex (plain image)</td>
+<td>-n 2		Power of n</td>
+</tr>
+
+<tr>
+<td>prism</td>
+<td>Develop a prism</td>
+<td>equirectangular</td>
+<td>plain image</td>
+<td>"-e 0.5		Eye height.
+-h 0.5		Height of the prism.
+-s 6		Number of sides.
+-z 2		Specify where to attach the zenith cap.
+-n 2		Specify where to attach the nadir cap."</td>
+</tr>
+
+<tr>
+<td>ribbon</td>
+<td>Convert a long image to a ribbon</td>
+<td>plain image</td>
+<td>plain image</td>
+<td>-a 0.5 or -a 200/500	Aspect ratio of the input image.</td>
+</tr>
+
+<tr>
+<td>rotate</td>
+<td>Rotate an image</td>
+<td>plain image</td>
+<td>plain image</td>
+<td>-a 0		Specify angle in degree.</td>
+</tr>
+
+<tr>
+<td>scale</td>
+<td>Scale an image</td>
+<td>plain image</td>
+<td>plain image</td>
+<td>"-x 1
+-y 1
+-xy 1		Specify amounts
+-p"</td>
+</tr>
+
+<tr>
+<td>slide</td>
+<td>Slide an image</td>
+<td>plain image</td>
+<td>plain image</td>
+<td>"-x 0
+-y 0		Specify amounts (in image coordinate)"</td>
+</tr>
+
+<tr>
+<td>stereographic</td>
+<td>Equirect to stereographic</td>
+<td>equirectangular</td>
+<td>plain image</td>
+<td>-a 90		Field of view.</td>
+</tr>
+
+<tr>
+<td>swap</td>
+<td>Swap xyz axes</td>
+<td>equirectangular</td>
+<td>equirectangular</td>
+<td>-n 1		Swap xyz axes multiple times.</td>
+</tr>
+
+<tr>
+<td>tile</td>
+<td>Slanted tiling of a long image. (incommensurate)</td>
+<td>plain image</td>
+<td>plain image (Mercator)</td>
+<td>"-a 0.5 or -a 200/500	Aspect ratio of the input image.
+-s 8		Number of stories		"</td>
+</tr>
+
+<tr>
+<td>tile2</td>
+<td>Slanted tiling of a long image. (commensurate)</td>
+<td>plain image</td>
+<td>plain image (Mercator)</td>
+<td>-a 0.5 or -a 200/500	Aspect ratio of the input image.</td>
+</tr>
+
+<tr>
+<td>tilt</td>
+<td>Tilt an equirectangular image around the x axis.</td>
+<td>equirectangular</td>
+<td>equirectangular</td>
+<td>-a 0		Specify angle in degree.</td>
+</tr>
+
+<tr>
+<td>tumblerfan</td>
+<td>Create your own tumbler</td>
+<td>Mercator</td>
+<td>plain image</td>
+<td>-s wtop,wbot,height	SIze of the fan. Wtop and wbot specifies the top and bottom width of the developed fan, and height specifies the fan height.</td>
+</tr>
+
+<tr>
+<td>load</td>
+<td>Load an image file</td>
+<td>file</td>
+<td>plain image</td>
+<td>file name</td>
+</tr>
+
+<tr>
+<td>interpolate</td>
+<td>Load an image file</td>
+<td>file</td>
+<td>plain image</td>
+<td>file name
+</table>
+
 #Panojector
 Panojector command accepts a few options.
 
@@ -14,9 +202,13 @@ Panojector command accepts a few options.
 Plugin describes how to project the `(-1..+1)x(-1..+1)` plane onto another `(-1..+1)x(-1..+1)` plane. You can apply these projection plugins to the original image by giving plugin(s) as an argument(s) of the panojector command.
 
 For example,
+
 `./panojector -s 400 mercator load original.jpg`
+
 converts the equirectangular image into mercator projection and output as a 400x400 image.
+
 `./panojector -s 600 box equirectangular load original.jpg`
+
 converts an Mercator panorama into equirectangular panorama and then develops as a box.
 
 When multiple plugins are given, they work as a pipeline.  Each plugin accepts options as its argument. Note that x coordinate points to the right, while y coordinate directs downwards. For complex coordinate, real points to the right, and imaginary directs downwards.
