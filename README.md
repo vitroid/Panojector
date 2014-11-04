@@ -1,4 +1,3 @@
-(I am updating the document. Old better PDF document is [here](http://dl.dropbox.com/u/972778/panojector/plugins.pdf))
 #Panojector Manual
 Panojector is a modular panorama image converter.
 ##Plugin specs
