@@ -273,6 +273,7 @@ This converts the inverted little planet image back to equirectangular panorama:
     ./panojector -s 1000 slide -x 1.25 equirectangular rotate -a 90 slide -x -0.25 exponential load sample2.jpg
 
 ![ex1b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex1b.jpg)
+
 (The sample image is provided by Pedro Moura Pinheiro at http://www.flickr.com/photos/pedromourapinheiro/4929306871 under Creative Commons (CC BY-NC-SA 2.0) License.)
 ###Example 2
 This converts a long train image to 6-story ribbon:
@@ -302,7 +303,7 @@ You can even “Create Your Own Starbucks Tumbler.”
 
 1. Measure the dimensions of the images: picture width, positions of four corners, and ceiling and floor positions at the first corner. 
 
-![ex5a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5a.jpg)
+    ![ex5a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5a.jpg)
 2. Put them as arguments of the boxsize.py program and run it. The program estimates the eye position in the box.
 
         ./boxsize.py 4000 538 1432 2541 3445 772 1247
@@ -311,7 +312,8 @@ You can even “Create Your Own Starbucks Tumbler.”
 
         ./panojector -s 2000 box -b 1,1.1724609375,0.609415798286 -e 0.5064453125,0.504081292687,0.521980455925 slide -x 0.269 load sample4.jpg
 
-![ex5b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5b.jpg)
+    ![ex5b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5b.jpg)
+
 For now, we provide only one rotation plugin, “tilt”, to give a rotation angle around the X axis to an equirectangular image.  In order to rotate the equirectangular image with YAW, PITCH, and ROLL angles in  PTgui and Hugin way, use the following parameters: (YAW, PITCH, and ROLL should be replaced by the values.)
 
     ./panojector -s 1000 swap tilt -a -YAW swap tilt -a PITCH swap tilt -a ROLL load sample4.jpg
