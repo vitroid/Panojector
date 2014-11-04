@@ -10,22 +10,29 @@
 </tr>
 
 <tr>
-<td>box</td>
-<td>Develop a box</td>
-<td>equirectangular</td>
-<td>plain image</td>
-<td>-b x,y,z<br />-e x,y,z</td>
-<td>aspect ratio of the box<br />
- eye position</td>
+<td rowspan="2">box</td>
+<td rowspan="2">Develop a box</td>
+<td rowspan="2">equirectangular</td>
+<td rowspan="2">plain image</td>
+<td>-b x,y,z</td>
+<td>aspect ratio of the box</td>
+</tr>
+<tr>
+<td>-e x,y,z</td>
+<td>eye position</td>
 </tr>
 
 <tr>
-<td>cone</td>
-<td>Develop a cone</td>
-<td>equirectangular</td>
-<td>plain image</td>
-<td>"-r 0.3		radius of the base
--e 0.2		eye height to cone height"</td>
+<td rowspan="2">cone</td>
+<td rowspan="2">Develop a cone</td>
+<td rowspan="2">equirectangular</td>
+<td rowspan="2">plain image</td>
+<td>-r 0.3</td>
+<td>radius of the base</td>
+</tr>
+<tr>
+<td>-e 0.2</td>
+<td>eye height to cone height</td>
 </tr>
 
 <tr>
@@ -33,7 +40,7 @@
 <td>Mercator to equirect</td>
 <td>Mercator</td>
 <td>equirectangular</td>
-<td>No option</td>
+<td colspan="2">No option</td>
 </tr>
 
 <tr>
@@ -41,7 +48,7 @@
 <td>exponential</td>
 <td>complex (plain image)</td>
 <td>complex (plain image)</td>
-<td>No option</td>
+<td colspan="2">No option</td>
 </tr>
 
 <tr>
@@ -49,7 +56,7 @@
 <td>invert</td>
 <td>complex (plain image)</td>
 <td>complex (plain image)</td>
-<td>No option</td>
+<td colspan="2">No option</td>
 </tr>
 
 <tr>
@@ -57,7 +64,7 @@
 <td>log</td>
 <td>complex (plain image)</td>
 <td>complex (plain image)</td>
-<td>No option</td>
+<td colspan="2">No option</td>
 </tr>
 
 <tr>
@@ -65,7 +72,7 @@
 <td>Equirect to Mercator</td>
 <td>equirectangular</td>
 <td>Mercator</td>
-<td>No option</td>
+<td colspan="2">No option</td>
 </tr>
 
 <tr>
@@ -73,19 +80,33 @@
 <td>power</td>
 <td>complex (plain image)</td>
 <td>complex (plain image)</td>
-<td>-n 2		Power of n</td>
+<td>-n 2</td>
+<td>Power of n</td>
 </tr>
 
 <tr>
-<td>prism</td>
-<td>Develop a prism</td>
-<td>equirectangular</td>
-<td>plain image</td>
-<td>"-e 0.5		Eye height.
--h 0.5		Height of the prism.
--s 6		Number of sides.
--z 2		Specify where to attach the zenith cap.
--n 2		Specify where to attach the nadir cap."</td>
+<td rowspan="5">prism</td>
+<td rowspan="5">Develop a prism</td>
+<td rowspan="5">equirectangular</td>
+<td rowspan="5">plain image</td>
+<td>-e 0.5</td>
+<td>Eye height.</td>
+</tr>
+<tr>
+<td>-h 0.5</td>
+<td>Height of the prism.</td>
+</tr>
+<tr>
+<td>-s 6</td>
+<td>Number of sides.</td>
+</tr>
+<tr>
+<td>-z 2</td>
+<td>Specify where to attach the zenith cap.</td>
+</tr>
+<tr>
+<td>-n 2</td>
+<td>Specify where to attach the nadir cap.</td>
 </tr>
 
 <tr>
@@ -93,7 +114,8 @@
 <td>Convert a long image to a ribbon</td>
 <td>plain image</td>
 <td>plain image</td>
-<td>-a 0.5 or -a 200/500	Aspect ratio of the input image.</td>
+<td>-a 0.5 or -a 200/500</td>
+<td>Aspect ratio of the input image.</td>
 </tr>
 
 <tr>
@@ -101,27 +123,38 @@
 <td>Rotate an image</td>
 <td>plain image</td>
 <td>plain image</td>
-<td>-a 0		Specify angle in degree.</td>
+<td>-a 0</td>
+<td>Specify angle in degree.</td>
 </tr>
 
 <tr>
-<td>scale</td>
-<td>Scale an image</td>
-<td>plain image</td>
-<td>plain image</td>
-<td>"-x 1
--y 1
--xy 1		Specify amounts
--p"</td>
+<td rowspan="4">scale</td>
+<td rowspan="4">Scale an image</td>
+<td rowspan="4">plain image</td>
+<td rowspan="4">plain image</td>
+<td>-x 1</td>
+<td rowspan="4">Specify amounts</td>
+</tr>
+<tr>
+<td>-y 1</td>
+</tr>
+<tr>
+<td>-xy 1</td>
+</tr>
+<tr>
+<td>-p</td>
 </tr>
 
 <tr>
-<td>slide</td>
-<td>Slide an image</td>
-<td>plain image</td>
-<td>plain image</td>
-<td>"-x 0
--y 0		Specify amounts (in image coordinate)"</td>
+<td rowspan="2">slide</td>
+<td rowspan="2">Slide an image</td>
+<td rowspan="2">plain image</td>
+<td rowspan="2">plain image</td>
+<td>-x 0</td>
+<td rowspan="2">Specify amounts (in image coordinate)</td>
+</tr>
+<tr>
+<td>-y 0</td>
 </tr>
 
 <tr>
@@ -129,7 +162,8 @@
 <td>Equirect to stereographic</td>
 <td>equirectangular</td>
 <td>plain image</td>
-<td>-a 90		Field of view.</td>
+<td>-a 90</td>
+<td>Field of view.</td>
 </tr>
 
 <tr>
@@ -137,16 +171,21 @@
 <td>Swap xyz axes</td>
 <td>equirectangular</td>
 <td>equirectangular</td>
-<td>-n 1		Swap xyz axes multiple times.</td>
+<td>-n 1</td>
+<td>Swap xyz axes multiple times.</td>
 </tr>
 
 <tr>
-<td>tile</td>
-<td>Slanted tiling of a long image. (incommensurate)</td>
-<td>plain image</td>
-<td>plain image (Mercator)</td>
-<td>"-a 0.5 or -a 200/500	Aspect ratio of the input image.
--s 8		Number of stories		"</td>
+<td rowspan="2">tile</td>
+<td rowspan="2">Slanted tiling of a long image. (incommensurate)</td>
+<td rowspan="2">plain image</td>
+<td rowspan="2">plain image (Mercator)</td>
+<td>-a 0.5 or -a 200/500</td>
+<td>Aspect ratio of the input image.</td>
+</tr>
+<tr>
+<td>-s 8</td>
+<td>Number of stories</td>
 </tr>
 
 <tr>
@@ -154,7 +193,7 @@
 <td>Slanted tiling of a long image. (commensurate)</td>
 <td>plain image</td>
 <td>plain image (Mercator)</td>
-<td>-a 0.5 or -a 200/500	Aspect ratio of the input image.</td>
+<td>-a 0.5 or -a 200/500</td><td>Aspect ratio of the input image.</td>
 </tr>
 
 <tr>
@@ -162,7 +201,8 @@
 <td>Tilt an equirectangular image around the x axis.</td>
 <td>equirectangular</td>
 <td>equirectangular</td>
-<td>-a 0		Specify angle in degree.</td>
+<td>-a 0</td>
+<td>Specify angle in degree.</td>
 </tr>
 
 <tr>
@@ -170,7 +210,8 @@
 <td>Create your own tumbler</td>
 <td>Mercator</td>
 <td>plain image</td>
-<td>-s wtop,wbot,height	SIze of the fan. Wtop and wbot specifies the top and bottom width of the developed fan, and height specifies the fan height.</td>
+<td>-s wtop,wbot,height</td>
+<td>Size of the fan. Wtop and wbot specifies the top and bottom width of the developed fan, and height specifies the fan height.</td>
 </tr>
 
 <tr>
@@ -178,7 +219,7 @@
 <td>Load an image file</td>
 <td>file</td>
 <td>plain image</td>
-<td>file name</td>
+<td colspan="2">file name</td>
 </tr>
 
 <tr>
@@ -186,7 +227,8 @@
 <td>Load an image file</td>
 <td>file</td>
 <td>plain image</td>
-<td>file name
+<td colspan="2">file name</td>
+</tr>
 </table>
 
 #Panojector
