@@ -40,7 +40,7 @@ public:
     complex<float> dst(dstx/A,dsty/A);
     complex<float> pi(M_PI,0.0);
     //complex<float> eye(0,1);//makes source vertical
-    complex<float> src = log(dst)/ pi; // * eye;
+    complex<float> src = log(dst); //   / pi; // * eye;
     return child->map( src.real(), src.imag() );
   }
 };

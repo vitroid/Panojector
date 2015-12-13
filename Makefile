@@ -1,12 +1,12 @@
 UNAME := $(shell uname)
 ifeq "Darwin" "$(UNAME)"
-LDFLAGS=-L/usr/local/Cellar/opencv/2.4.8.2/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_calib3d -lopencv_contrib -lopencv_features2d -lopencv_imgproc
+LDFLAGS=-L/usr/local/Cellar/opencv/2.4.12/lib -lopencv_core -lopencv_highgui -lopencv_imgproc -lopencv_calib3d -lopencv_contrib -lopencv_features2d -lopencv_imgproc
 endif
 ifeq "Linux" "$(UNAME)"
 LDFLAGS=-lcv -lhighgui
 endif
-CXX=g++ -O3 -Isrc #-g
-SO=load.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so mercator.so tile.so tile2.so equirectangular.so rotate.so tilt.so tumblerfan.so stereographic.so prism.so cone.so swap.so interpolate.so
+CXX=g++ -O3 -Isrc -I/usr/local/Cellar/opencv/2.4.12/include #-g
+SO=grid4.so saru.so load.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so mercator.so tile.so tile2.so equirectangular.so rotate.so tilt.so tumblerfan.so stereographic.so prism.so cone.so swap.so interpolate.so
 TARGETS=panojector $(SO)
 all: $(TARGETS)
 clean:

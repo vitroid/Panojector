@@ -39,7 +39,7 @@ public:
   {
     complex<float> dst(dstx/A,dsty/A);
     complex<float> pi(M_PI,0.0);
-    complex<float> src = exp(dst*pi);
+    complex<float> src = exp(dst);
     return child->map( src.real(), src.imag() );
   }
 };
