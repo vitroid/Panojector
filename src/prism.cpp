@@ -9,7 +9,7 @@ public:
   void usage( int argc, char* argv[] )
   {
     fprintf( stderr, "Usage: %s [-e x][-h y][-s x][-z x][-n x] [projectors]\n", argv[0] );
-    fprintf( stderr, "Convert equirectangular 2:1 image to a prism.\n" );
+    fprintf( stderr, "Convert equirectangular 2:1 image to a development of a prism.\n" );
     fprintf( stderr, "Options:\n" );
     fprintf( stderr, "\t-e 0.5\tSpecify eye point from the center of prism.\n" ); 
     fprintf( stderr, "\t-h 0.5\tSpecify height.\n" ); 

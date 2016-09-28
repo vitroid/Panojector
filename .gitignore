@@ -12,3 +12,8 @@ build/
 *.png
 *.tif
 *.log
+*.jpg
+
+*.psd
+
+*.ai
