@@ -1,0 +1,7 @@
+Todo
+
+Automatic aspect ratio handler.
+
+Loader for Flickr.
+Loader for StreetView.
+Combine with notlion's work. https://github.com/notlion

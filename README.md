@@ -37,6 +37,15 @@ Panojector is a modular panorama image converter.
 </tr>
 
 <tr>
+<td rowspan="1">cylindrical_to_equirectangular</td>
+<td rowspan="1">Cylindrical to equirectangular</td>
+<td rowspan="1">Side of a circular cylinder</td>
+<td rowspan="1">equirectangular</td>
+<td>-s 6</td>
+<td>Number of sides</td>
+</tr>
+
+<tr>
 <td>equirectangular</td>
 <td>Mercator to equirect</td>
 <td>Mercator</td>
@@ -265,13 +274,13 @@ This converts the sample rectangular image to a swirl:
     ./panojector -s 600 stereographic equirectangular tile2 -a 706/881 load sample.jpg
 
 The first plugin “tile2” tiles the original image, second plugin “equirectangular” regards the image as a Mercator (conformal) panorama and convert it into equirectangular panorama image, and the last plugin “stereographic” converts the equirectangular panorama into stereographic (conformal) image.
-![ex1a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex1a.jpg)
+![ex1a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex1a.jpg)
 
 This converts the inverted little planet image back to equirectangular panorama:
 
     ./panojector -s 1000 slide -x 1.25 equirectangular rotate -a 90 slide -x -0.25 exponential load sample2.jpg
 
-![ex1b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex1b.jpg)
+![ex1b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex1b.jpg)
 
 (The sample image is provided by Pedro Moura Pinheiro at http://www.flickr.com/photos/pedromourapinheiro/4929306871 under Creative Commons (CC BY-NC-SA 2.0) License.)
 ###Example 2
@@ -279,7 +288,7 @@ This converts a long train image to 6-story ribbon:
 
     ./panojector -s 1000 ribbon -a 826/29999 -s 6 load sample3.jpg
 
-![ex2.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex2.jpg)
+![ex2.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex2.jpg)
 ###Example 3
 This converts the same image into a swirl:
 
@@ -289,30 +298,33 @@ and a tilted swirl:
 
     ./panojector -s 1000 rotate -a 45 stereographic -a 300 tilt -a 30 equirectangular tile -a 826/29999 -s 8 load sample3.jpg
 
-![ex3a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex3a.jpg)
-![ex3b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex3b.jpg)
+![ex3a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex3a.jpg)
+![ex3b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex3b.jpg)
+
+For now, we provide only one rotation plugin, “tilt”, to give a rotation angle around the X axis to an equirectangular image.  In order to rotate the equirectangular image with YAW, PITCH, and ROLL angles in  PTgui and Hugin way, use the following parameters: (YAW, PITCH, and ROLL should be replaced by the values.)
+
+    ./panojector -s 1000 swap tilt -a -YAW swap tilt -a PITCH swap tilt -a ROLL load sample4.jpg
+
 ###Example 4
 You can even “Create Your Own Starbucks Tumbler.”
 
     ./panojector -s 1000 tumblerfan -s 214,173,163 tile -a 826/29999 -s 8 load sample3.jpg
 
-![ex4.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex4.jpg)
+![ex4.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex4.jpg)
 ###Example 5
-A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room. (The sample image is provided in a courtesy of Simon Sherwin. Original photo is available at [Flickr](https://www.flickr.com/photos/simons/4524005292).  Please download the [original image](https://farm5.staticflickr.com/4051/4524005292_5c0c99cffa_o.jpg) by yourself and rename it as `sample4.jpg`.)
+A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room. (The sample image is provided in a courtesy of Simon Sherwin. Original photo is available at [Flickr](https://www.flickr.com/photos/simons/4524005292).  Please download the [original image](https://farm5.staticflickr.com/4051/4524005292_5c0c99cffa_o.jpg) by yourself and rename it as `sample.jpg`.)
 
 1. Measure the dimensions of the images: picture width, positions of four corners, and ceiling and floor positions at the first corner. 
 
-    ![ex5a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5a.jpg)
+    ![ex5a.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex5a.jpg)
 2. Put them as arguments of the boxsize.py program and run it. The program estimates the eye position in the box.
 
         ./boxsize.py 4000 538 1432 2541 3445 772 1247
 
 3. You get the optimal parameters to convert the image into a box development. Modify as you like, and run it.
 
-        ./panojector -s 2000 box -b 1,1.1724609375,0.609415798286 -e 0.5064453125,0.504081292687,0.521980455925 slide -x 0.269 load sample4.jpg
+        ./panojector -s 4000 box -b 1,1.1724609375,0.609415798286 -e 0.5064453125,0.504081292687,0.521980455925 slide -x 0.269 interpolate sample.jpg
 
-    ![ex5b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/Samples/ex5b.jpg)
+    ![ex5b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex5b.jpg)
 
-For now, we provide only one rotation plugin, “tilt”, to give a rotation angle around the X axis to an equirectangular image.  In order to rotate the equirectangular image with YAW, PITCH, and ROLL angles in  PTgui and Hugin way, use the following parameters: (YAW, PITCH, and ROLL should be replaced by the values.)
 
-    ./panojector -s 1000 swap tilt -a -YAW swap tilt -a PITCH swap tilt -a ROLL load sample4.jpg
