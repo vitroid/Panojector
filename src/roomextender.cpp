@@ -9,7 +9,7 @@ protected:
 public:
   void usage( int argc, char* argv[] )
   {
-    fprintf( stderr, "Usage: %s [-e x,y,z][-b x,y,z] [projectors]\n", argv[0] );
+    fprintf( stderr, "Usage: %s [-e x,y,z][-b x,y,z][-r x,y,z] [projectors]\n", argv[0] );
     fprintf( stderr, "Extend the equirectangular 2:1 room image, then restore the equirectangular again.\n" );
     fprintf( stderr, "Options:\n" );
     fprintf( stderr, "\t-e 0.5,0.5,0.5\tSpecify eye point (center = 0.5).\n" ); 
