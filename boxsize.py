@@ -73,7 +73,7 @@ h2 = l*tan(theta[1])
 #print p,q,r,h1,h2
 print "./panojector -s %s" % int(width),
 print "box -b %s,%s,%s" % (1,q+r,h1+h2),
-print "-e %s,%s,%s" % (p,q/(q+r),h2/(h1+h2)),
+print "-e %s,%s,%s" % (p,q/(q+r),1.0 - h2/(h1+h2)),
 print "slide -x %s" % (x[0]*2.0/width),
 print "interpolate equi.jpg"
 
