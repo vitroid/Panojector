@@ -4,7 +4,7 @@ class Box2Er : public Projector {
 protected:
   float boxx,boxy,boxz,eyex,eyey,eyez;
   int repx, repy, repz;
-  float Lboxx,Lboxy,Lboxz;
+  int inverse;
   Projector* child;
 public:
   void usage( int argc, char* argv[] )
@@ -24,12 +24,17 @@ public:
     repx = 1;
     repy = 1;
     repz = 1;
+    inverse = 0;
 
     int c = 1;
     while ( c < argc ){
       if ( 0 == strcmp( argv[c], "-b" )){
 	c++;
 	sscanf(argv[c], "%f,%f,%f", &boxx, &boxy, &boxz );
+	c++;
+      }
+      else if ( 0 == strcmp( argv[c], "-i" )){
+        inverse += 1;
 	c++;
       }
       else if ( 0 == strcmp( argv[c], "-e" )){
@@ -53,44 +58,49 @@ public:
     argc -= c;
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
-    Lboxx = boxx * repx;
-    Lboxy = boxy * repy;
-    Lboxz = boxz * repz;
   }
   uchar* map(float dst2x, float dst2y)
   {
-    //dst2x : -0.5 .. +0.5
-    //dst2y : -1 .. +1;
+    //dst2x : -1 .. +1
+    //dst2y : -0.5 .. +0.5;
     //to direction vector
     float theta = dst2y * M_PI;
-    float phi   = dst2x * M_PI;
+    float phi   = dst2x * M_PI-M_PI/2;
     //room corner is on the edge of ER image
-    float phi0 = atan2(boxy*eyey, boxx*eyex);// - M_PI;
-    phi += phi0;
+    //float phi0 = atan2(boxy*eyey, boxx*eyex);// - M_PI;
+    //phi += phi0;
+    //unit look vector
     float tx,ty,tz,tr;
     tz = sin(theta);
     tr = cos(theta);
     tx = cos(phi) * tr;
     ty = sin(phi) * tr;
-    //Project to the extended box
-    float Dz = -boxz*eyez - boxz*(repz-1)/2;
+    //where the look vector intersects the ceiling.
+    float Dz =-boxz*eyez - boxz*(repz-1)/2;
     float Dx = tx/tz*Dz;
     float Dy = ty/tz*Dz;
-    float Cx = Dx + boxx*eyex + boxx*(repx-1)/2;
-    float Cy = Dy + boxy*eyey + boxy*(repy-1)/2;
-    float Cz = Dz + boxz*eyez + boxz*(repz-1)/2;
-    if ( ( 0 <= Cx ) && ( Cx < boxx*repx ) &&
-         ( 0 <= Cy ) && ( Cy < boxy*repy ) && ( tz < 0 ) ){
+    //relative vector from the corner of the face
+    //max: repx,repy,repz
+    float Cx = Dx/boxx + eyex + (repx-1)/2;
+    float Cy = Dy/boxy + eyey + (repy-1)/2;
+    if ( ( 0 <= Cx ) && ( Cx < repx ) &&
+         ( 0 <= Cy ) && ( Cy < repy ) && ( tz < 0 ) ){
       //on the ceiling
-      //position on the box is (cx,cy,cz)
-      //now reconvert it to the angles
-      float dx = Cx - floor(Cx/boxx)*boxx - boxx*eyex;
-      float dy = Cy - floor(Cy/boxy)*boxy - boxy*eyey;
-      float dz =                          - boxz*eyez;
+      //corresponding location on the unit image
+      float dx = (Cx - floor(Cx) - eyex)*boxx;
+      float dy = (Cy - floor(Cy) - eyey)*boxy;
+      float dz =                  -eyez *boxz;
+      if ( inverse )
+        dz = boxz - eyez*boxz;
+      //float rr = dx*dx+dy*dy+dz*dz;
+      //rr = sqrt(rr);
+      //printf("%f %f %f  %f %f %f\n", tx,ty,tz,dx/rr,dy/rr,dz/rr);
+      //if ( inverse ) dz = boxz - boxz*eyez;
       float dr = sqrt(dx*dx+dy*dy);
-      float h = atan2( dy, dx ) - phi0;
+      float h  = atan2( dy, dx )+M_PI/2;
       if ( h < -M_PI ) h += 2*M_PI;
-      float v = atan2( dz, dr );
+      float v  = atan2( dz, dr );
+      //printf("%f %f  %f %f\n", theta,phi,v,h);
       return child->map( h / M_PI, v / M_PI );
     }
     else {
@@ -109,8 +119,10 @@ public:
         float dx = Cx - floor(Cx/boxx)*boxx - boxx*eyex;
         float dy = Cy - floor(Cy/boxy)*boxy - boxy*eyey;
         float dz =                     boxz - boxz*eyez;
+        if ( inverse )
+          dz = - eyez*boxz;
         float dr = sqrt(dx*dx+dy*dy);
-        float h = atan2( dy, dx ) - phi0;
+        float h = atan2( dy, dx ) + M_PI/2;
         if ( h < -M_PI ) h += 2*M_PI;
         float v = atan2( dz, dr );
         return child->map( h / M_PI, v / M_PI );
@@ -131,8 +143,10 @@ public:
           float dx =                          - boxx*eyex;
           float dy = Cy - floor(Cy/boxy)*boxy - boxy*eyey;
           float dz = Cz - floor(Cz/boxz)*boxz - boxz*eyez;
+          if ( inverse )
+            dx = boxx - eyex*boxx;
           float dr = sqrt(dx*dx+dy*dy);
-          float h = atan2( dy, dx ) - phi0;
+          float h = atan2( dy, dx ) + M_PI/2;
           if ( h < -M_PI ) h += 2*M_PI;
           float v = atan2( dz, dr );
           return child->map( h / M_PI, v / M_PI );
@@ -153,8 +167,10 @@ public:
             float dx =                     boxx - boxx*eyex;
             float dy = Cy - floor(Cy/boxy)*boxy - boxy*eyey;
             float dz = Cz - floor(Cz/boxz)*boxz - boxz*eyez;
+            if ( inverse )
+              dx = - eyex*boxx;
             float dr = sqrt(dx*dx+dy*dy);
-            float h = atan2( dy, dx ) - phi0;
+            float h = atan2( dy, dx ) + M_PI/2;
             if ( h < -M_PI ) h += 2*M_PI;
             float v = atan2( dz, dr );
             return child->map( h / M_PI, v / M_PI );
@@ -175,8 +191,10 @@ public:
               float dx = Cx - floor(Cx/boxx)*boxx - boxx*eyex;
               float dy =                          - boxy*eyey;
               float dz = Cz - floor(Cz/boxz)*boxz - boxz*eyez;
+              if ( inverse )
+                dy = boxy - eyey*boxy;
               float dr = sqrt(dx*dx+dy*dy);
-              float h = atan2( dy, dx ) - phi0;
+              float h = atan2( dy, dx ) + M_PI/2;
               if ( h < -M_PI ) h += 2*M_PI;
               float v = atan2( dz, dr );
               return child->map( h / M_PI, v / M_PI );
@@ -197,8 +215,10 @@ public:
                 float dx = Cx - floor(Cx/boxx)*boxx - boxx*eyex;
                 float dy =                     boxy - boxy*eyey;
                 float dz = Cz - floor(Cz/boxz)*boxz - boxz*eyez;
+                if ( inverse )
+                  dy = - eyey*boxy;
                 float dr = sqrt(dx*dx+dy*dy);
-                float h = atan2( dy, dx ) - phi0;
+                float h = atan2( dy, dx ) + M_PI/2;
                 if ( h < -M_PI ) h += 2*M_PI;
                 float v = atan2( dz, dr );
                 return child->map( h / M_PI, v / M_PI );

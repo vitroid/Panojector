@@ -51,7 +51,7 @@ public:
     //dsty = dsty + (eye - 0.5) * boxz;
     float h,v;//angles
     //angles for the center of each face
-    float h0 = atan( boxx*eyex/(boxy*eyey) ) - M_PI;
+    float h0 = 0; //atan( boxx*eyex/(boxy*eyey) ) - M_PI;
     float h1 = h0 + M_PI/2;
     float h2 = h1 + M_PI/2;
     float h3 = h2 + M_PI/2;
