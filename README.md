@@ -1,6 +1,6 @@
-#Panojector Manual
+# Panojector Manual
 Panojector is a modular panorama image converter.
-##Plugin specs
+## Plugin specs
 <table>
 <tr>
 <th></th>
@@ -241,18 +241,18 @@ Panojector is a modular panorama image converter.
 </tr>
 </table>
 
-##Panojector command
+## Panojector command
 Panojector command accepts a few options.
 
-###Usage:
+### Usage:
     panojector [-s size][-o outfile][list of plugins.....] load filename
 
-###Options:
+### Options:
 
     -s n	   Set image size to n x n.
 
     -o file  Specify the output file name.
-##Notes
+## Notes
 Plugin describes how to project the `(-1..+1)x(-1..+1)` plane onto another `(-1..+1)x(-1..+1)` plane. You can apply these projection plugins to the original image by giving plugin(s) as an argument(s) of the panojector command.
 
 For example,
@@ -267,8 +267,8 @@ converts an Mercator panorama into equirectangular panorama and then develops as
 
 When multiple plugins are given, they work as a pipeline.  Each plugin accepts options as its argument. Note that x coordinate points to the right, while y coordinate directs downwards. For complex coordinate, real points to the right, and imaginary directs downwards.
 
-##Other Examples
-###Example 1
+## Other Examples
+### Example 1
 This converts the sample rectangular image to a swirl:
 
     ./panojector -s 600 stereographic equirectangular tile2 -a 706/881 load sample.jpg
@@ -283,13 +283,13 @@ This converts the inverted little planet image back to equirectangular panorama:
 ![ex1b.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex1b.jpg)
 
 (The sample image is provided by Pedro Moura Pinheiro at http://www.flickr.com/photos/pedromourapinheiro/4929306871 under Creative Commons (CC BY-NC-SA 2.0) License.)
-###Example 2
+### Example 2
 This converts a long train image to 6-story ribbon:
 
     ./panojector -s 1000 ribbon -a 826/29999 -s 6 load sample3.jpg
 
 ![ex2.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex2.jpg)
-###Example 3
+### Example 3
 This converts the same image into a swirl:
 
     ./panojector -s 1000 stereographic equirectangular tile -a 826/29999 -s 8 load sample3.jpg
@@ -305,13 +305,13 @@ For now, we provide only one rotation plugin, “tilt”, to give a rotation ang
 
     ./panojector -s 1000 swap tilt -a -YAW swap tilt -a PITCH swap tilt -a ROLL load sample4.jpg
 
-###Example 4
+### Example 4
 You can even “Create Your Own Starbucks Tumbler.”
 
     ./panojector -s 1000 tumblerfan -s 214,173,163 tile -a 826/29999 -s 8 load sample3.jpg
 
 ![ex4.jpg](https://raw.githubusercontent.com/vitroid/Panojector/master/figures/ex4.jpg)
-###Example 5
+### Example 5
 A small utility `boxsize.py` calculates the proper dimension of the box for your equirectangular panorama image. Here is an example image of a Japanese room. (The sample image is provided in a courtesy of Simon Sherwin. Original photo is available at [Flickr](https://www.flickr.com/photos/simons/4524005292).  Please download the [original image](https://farm5.staticflickr.com/4051/4524005292_5c0c99cffa_o.jpg) by yourself and rename it as `sample.jpg`.)
 
 1. Measure the dimensions of the images: picture width, positions of four corners, and ceiling and floor positions at the first corner. 
