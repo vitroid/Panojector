@@ -63,18 +63,18 @@ phi = [(x[1]-x[0])*2*pi/width,
        (x[3]-x[2])*2*pi/width,
        (x[0]+width-x[3])*2*pi/width]
 p,q,r = fit(phi)
-l = sqrt(p**2+q**2)
+l = sqrt(p**2+q**2)  #distance to the first pillar
 
 theta = [(height/2-y[0])*pi/height,
          (y[1]-height/2)*pi/height]
 
-h1 = l*tan(theta[0])
+h1 = l*tan(theta[0])  #h1+h2=length of the first pillar
 h2 = l*tan(theta[1])
 #print p,q,r,h1,h2
 print "./panojector -s %s" % int(width),
 print "box -b %s,%s,%s" % (1,q+r,h1+h2),
-print "-e %s,%s,%s" % (p,q/(q+r),h2/(h1+h2)),
-print "slide -x %s" % (x[0]*2.0/width),
+print "-e %s,%s,%s" % (p,q/(q+r),h1/(h1+h2)),
+print "slide -x %s" % (x[0]*2.0/width+atan2(p,q)/pi+1),
 print "interpolate equi.jpg"
 
             

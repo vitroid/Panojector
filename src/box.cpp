@@ -51,14 +51,14 @@ public:
     //dsty = dsty + (eye - 0.5) * boxz;
     float h,v;//angles
     //angles for the center of each face
-    float h0 = atan( boxx*eyex/(boxy*eyey) ) - M_PI;
+    float h0 = 0; //atan( boxx*eyex/(boxy*eyey) ) - M_PI;
     float h1 = h0 + M_PI/2;
     float h2 = h1 + M_PI/2;
     float h3 = h2 + M_PI/2;
     if ( ( -boxz / 2 <= dsty ) && ( dsty <= boxz / 2 ) ){
       //in the horizontal belt
       if ( dstx < -boxy ){
-	dsty = dsty + (eyez - 0.5) * boxz;
+	dsty = dsty + (0.5 - eyez) * boxz;
 	//panel 0
 	// x offset from the center of panel
 	dstx += boxy + boxx*(1.0-eyex);
@@ -69,7 +69,7 @@ public:
 	dsty = v / M_PI; 
       }
       else if ( dstx < 0 ){
-	dsty = dsty + (eyez - 0.5) * boxz;
+	dsty = dsty + (0.5 - eyez) * boxz;
 	//panel 1
 	dstx += boxy*(1.0-eyey);
 	h = atan( dstx / (boxx*(1-eyex)) );
@@ -79,7 +79,7 @@ public:
 	dsty = v / M_PI; 
       }
       else if ( dstx < boxx ){
-	dsty = dsty + (eyez - 0.5) * boxz;
+	dsty = dsty + (0.5 - eyez) * boxz;
 	//panel 2
 	dstx -= boxx*(1-eyex);
 	h = atan( dstx / (boxy*(1-eyey)) );
@@ -89,7 +89,7 @@ public:
 	dsty = v / M_PI; 
       }
       else{
-	dsty = dsty + (eyez - 0.5) * boxz;
+	dsty = dsty + (0.5 - eyez) * boxz;
 	//panel 3
 	dstx -= (boxy*(1-eyey) + boxx);
 	h = atan( dstx / (boxx*eyex) );
@@ -110,7 +110,7 @@ public:
 	h += M_PI;
       }
       float r = sqrt( dstx*dstx + dsty*dsty );
-      v = atan( eyez*boxz / r );
+      v = atan( (1.0 - eyez)*boxz / r );
       h += h2;
       dstx = h / M_PI;
       dsty = v / M_PI; 
@@ -126,7 +126,7 @@ public:
 	h += M_PI;
       }
       float r = sqrt( dstx*dstx + dsty*dsty );
-      v = -atan( (boxz-eyez*boxz) / r );
+      v = -atan( eyez*boxz / r );
       h = h2 - h;
       dstx = h / M_PI;
       dsty = v / M_PI; 
