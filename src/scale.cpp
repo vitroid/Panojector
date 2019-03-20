@@ -56,17 +56,17 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map( complex<float> dst )
   {
-    dstx /= x;
+    float dstx=dst.real() / x;
     if ( pad ){
       if ( dstx < -1.0 )
 	dstx = -1.0;
       else if ( dstx > 1.0 )
 	dstx = 1.0;
     }
-    dsty /= y;
-    return child->map(dstx,dsty);
+    float dsty = dst.imag() / y;
+    return child->map( complex<float>(dstx,dsty) );
   }
 };
 

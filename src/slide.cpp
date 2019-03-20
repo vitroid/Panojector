@@ -2,7 +2,7 @@
 
 class Slide : public Projector {
 protected:
-  float x,y;
+  complex<float> displace;
   Projector* child;
 public:
   void usage( int argc, char* argv[] )
@@ -15,8 +15,8 @@ public:
   }
   Slide(int argc, char* argv[])
   {
-    x=0;
-    y=0;
+    float x=0;
+    float y=0;
 
     int c = 1;
     while ( c < argc ){
@@ -37,14 +37,15 @@ public:
 	break;
       }
     }
+    displace= complex<float>(x,y);
     argv += c;
     argc -= c;
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map( complex<float> dst )
   {
-    return child->map(dstx+x,dsty+y);
+    return child->map(dst+displace);
   }
 };
 

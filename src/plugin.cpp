@@ -37,7 +37,7 @@ Projector* plugin_load(int argc, char* argv[]) {
 }
 
 
-
+/*
 //Same coordinate as the screen. Origin is at the corner.
 void getpixel( IplImage* const src, float x,float y, IplImage* dst, int dx, int dy )
 {
@@ -59,9 +59,9 @@ void getpixel( IplImage* const src, float x,float y, IplImage* dst, int dx, int 
     }
   }
 }
+*/
 
-
-
+ /*
 //Same coordinate as the screen. Origin is at the corner.
 void white( IplImage* dst, int dx, int dy )
 {
@@ -72,26 +72,9 @@ void white( IplImage* dst, int dx, int dy )
     }
   }
 }
+ */
+ 
 
-
-//Same coordinate as the screen. Origin is at the corner.
-void average( IplImage* const src, IplImage* dst, int dx, int dy )
-{
-  if ( dx >= 0 && dx< dst->width  &&
-       dy >= 0 && dy< dst->height ){
-    for ( int ch=0; ch<3; ch++ ){
-      int sum = 0;
-      for(int y=0;y<src->height; y++){
-	for(int x=0; x<src->width; x++){
-	  unsigned char v = src->imageData[src->widthStep * y + x * 3 + ch];
-	  sum += (int)v;
-	}
-      }
-      sum /= (src->height*src->width);
-      dst->imageData[dst->widthStep * dy + dx * 3 + ch] = sum;
-    }
-  }
-}
 
 
 

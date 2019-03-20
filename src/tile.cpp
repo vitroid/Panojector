@@ -63,8 +63,10 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
   {
+    float dstx = dst.real();
+    float dsty = dst.imag();
     float sx = dstx*e1x + dsty*e1y;
     float sy = dstx*e2x + dsty*e2y;
     float dy = floor( sy / h + 0.5 );
@@ -74,7 +76,7 @@ public:
     sx = sx / h * aspect * 2.0;
     sy = sy / h * aspect * 2.0;
     sx -= floor( sx/2.0 + 0.5 )*2.0;
-    return child->map( sx, sy );
+    return child->map( complex<float>(sx, sy) );
   }
 };
 

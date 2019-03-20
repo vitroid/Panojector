@@ -6,34 +6,36 @@
 using namespace std;
 
 
-IplImage* scan( int size, Projector& projector, int rgb[3] )
+Mat scan( int size, Projector& projector, int rgb[3] )
 {
-  IplImage* dst = cvCreateImage( cvSize(size, size), IPL_DEPTH_8U, 3 );
+  Mat dst(size, size, CV_8UC3);
   const int super = 3;
-  IplImage* subpix = cvCreateImage( cvSize(super,super), IPL_DEPTH_8U, 3 );
+  Mat subpix(super,super, CV_8UC3);
   for(int y=0;y<size;y++){
     for(int x=0;x<size;x++){
       for(int dy=0;dy<super;dy++){
 	for(int dx=0;dx<super;dx++){
 	  float rx = (super*x+dx)*2.0 / (size*super) - 1.0;
 	  float ry = (super*y+dy)*2.0 / (size*super) - 1.0;
-	  uchar* pixel = projector.map(rx,ry);
-	  if ( pixel ){
-	    for ( int ch=0; ch<3; ch++ ){
-	      subpix->imageData[subpix->widthStep * dy + dx * 3 + ch] = pixel[ch];
-	    }
-	  }
+	  complex<float> r(rx,ry);
+	  Vec3b pixel = projector.map(r);
+	  //if ( pixel ){
+	  subpix.at<Vec3b>(dy,dx) = pixel;
+	    /*}
 	  else{
 	    for ( int ch=0; ch<3; ch++ ){
-	      subpix->imageData[subpix->widthStep * dy + dx * 3 + ch] = rgb[ch];
+	      subpix.at(dy,dx)[ch] = rgb[ch];
 	    }
 	  }
+	    */
 	}
       }
-      average(subpix, dst,x,y);
+      vector<Mat> channels;
+      split(subpix, channels);
+      dst.at<Vec3b>(y,x) = Vec3b(mean(channels[0])[0], mean(channels[1])[0], mean(channels[2])[0]);
     }
   }
-  cvReleaseImage( &subpix );
+  //cvReleaseImage( &subpix );
   return dst;
 }
 
@@ -101,7 +103,7 @@ int main( int argc, char* argv[] ){
   argv += c;
   argc -= c;
   Projector* projector = plugin_load( argc, argv );
-  IplImage* dst = scan( width, *projector, rgb );
-  cvSaveImage( dstfilename, dst );
-  cvReleaseImage (&dst);
+  Mat dst = scan( width, *projector, rgb );
+  imwrite( dstfilename, dst );
+  //cvReleaseImage (&dst);
 }

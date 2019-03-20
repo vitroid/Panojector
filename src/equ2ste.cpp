@@ -36,27 +36,27 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
   {
-    float L = 2.0*lmax*sqrt(dstx*dstx + dsty*dsty);
+    float L = 2.0*lmax*abs(dst);
     float theta = M_PI/2.0 - 2.0 * atan( L / 2.0 );
     float phi;
-    if ( dstx == 0 ){
+    if ( dst.real() == 0 ){
       phi = M_PI / 2.0;
-      if ( dsty < 0.0 ){
+      if ( dst.imag() < 0.0 ){
 	phi += M_PI;
       }
     }
     else{
-      phi = atan( dsty / dstx );
+      phi = atan( dst.imag() / dst.real() );
     }
-    if ( dstx < 0.0 ){
+    if ( dst.real() < 0.0 ){
       phi += M_PI;
     }
     phi -= floor( phi / (2.0*M_PI) + 0.5 ) * (2.0*M_PI);
     theta /= M_PI;
     phi   /= M_PI;
-    return child->map( phi, theta );
+    return child->map( complex<float>(phi, theta) );
   }
 };
 

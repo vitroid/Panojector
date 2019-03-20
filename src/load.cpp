@@ -1,8 +1,9 @@
 #include "plugin.hpp"
 
+
 class Load : public Projector {
 protected:
-  IplImage* src;
+  Mat src;
 public:
   void usage( int argc, char* argv[] )
   {
@@ -12,20 +13,20 @@ public:
   }
   Load(int argc, char* argv[])
   {
-    src = cvLoadImage( argv[1], CV_LOAD_IMAGE_COLOR );
+    src = imread( argv[1] );
     fprintf( stderr, "%s\n", argv[1] );
   }
-  uchar* map(float x, float y)
+  Vec3b map(complex<float> c)
   {
-    int sx = x * (float)src->width / 2.0 + src->width / 2.0;
-    int sy = y * (float)src->width / 2.0 + src->height / 2.0;
-    sx %= src->width;
+    int sx = c.real() * (float)src.cols / 2.0 + src.cols / 2.0;
+    int sy = c.imag() * (float)src.cols / 2.0 + src.rows / 2.0;
+    sx %= src.cols;
     if ( sx < 0 )
-      sx += src->width;
-    sy %= src->height;
+      sx += src.cols;
+    sy %= src.rows;
     if ( sy < 0 )
-      sy += src->height;
-    return (uchar*)(src->imageData + src->widthStep*sy + sx*src->nChannels);
+      sy += src.rows;
+    return src.at<Vec3b>(sy,sx);
   }
 };
 

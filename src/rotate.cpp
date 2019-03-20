@@ -37,9 +37,9 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
   {
-    return child->map( dstx*cos(th)+dsty*sin(th), -dstx*sin(th)+dsty*cos(th) );
+    return child->map( dst*complex<float>(cos(th),-sin(th)));
   }
 };
 

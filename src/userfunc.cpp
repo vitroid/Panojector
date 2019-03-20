@@ -1,34 +1,39 @@
 #include "plugin.hpp"
 
-class Logg : public Projector {
+class Rotate : public Projector {
 protected:
+  float th;
   Projector* child;
 public:
   void usage( int argc, char* argv[] )
   {
     fprintf( stderr, "Usage: %s [projectors]\n", argv[0] );
+    fprintf( stderr, "Projection by user-defined function.\n" );
     exit(1);
   }
-  Logg(int argc, char* argv[])
+  Rotate(int argc, char* argv[])
   {
+    th = 0.0;
+
     int c = 1;
     argv += c;
     argc -= c;
-    //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
   Vec3b map(complex<float> dst)
   {
-    return child->map( log(dst) );
+     //modify it
+    complex<float> src = dst * complex<float>(0.5, sqrt(3)/2.0);
+    return child->map( src );
   }
 };
 
 
 // the class factories
 extern "C" Projector* create(int argc, char* argv[]) {
-  return new Logg(argc, argv);
+  return new Rotate(argc, argv);
 }
 
-extern "C" void destroy(Logg* p) {
+extern "C" void destroy(Rotate* p) {
     delete p;
 }

@@ -6,7 +6,7 @@ ifeq "Linux" "$(UNAME)"
 LDFLAGS=-lcv -lhighgui
 endif
 CXX=g++ -O3 -Isrc `pkg-config opencv --cflags`
-SO=grid4.so saru.so load.so slide.so box.so scale.so invert.so exponential.so power.so ribbon.so log.so equ2mer.so tile.so tile2.so mer2equ.so rotate.so tilt.so tumblerfan.so equ2ste.so prism.so cone.so swap.so interpolate.so er_ripple.so cyl2equ.so equ2cyl.so
+SO=load.so rotate.so userfunc.so scale.so log.so invert.so slide.so exponential.so tile.so mer2equ.so equ2ste.so # grid4.so saru.so box.so power.so ribbon.so equ2mer.so tile2.so mer2equ.so tilt.so tumblerfan.so equ2ste.so prism.so cone.so swap.so interpolate.so er_ripple.so cyl2equ.so equ2cyl.so
 TARGETS=panojector $(SO)
 all: $(TARGETS)
 clean:

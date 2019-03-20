@@ -19,12 +19,12 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
   {
-    float theta = dsty * M_PI;
-    float tx    = dstx;
+    float theta = dst.imag() * M_PI;
+    float tx    = dst.real();
     float ty    = log( tan(M_PI/4.0 + theta/2.0) ) / M_PI;
-    return child->map(tx,ty);
+    return child->map(complex<float>(tx,ty));
   }
 };
 
