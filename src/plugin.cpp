@@ -1,7 +1,5 @@
 #include <dlfcn.h>
 #include <iostream>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
 #include "plugin.hpp"
 using namespace std;
 

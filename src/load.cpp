@@ -15,6 +15,7 @@ public:
   {
     src = imread( argv[1] );
     fprintf( stderr, "%s\n", argv[1] );
+    fprintf( stderr, "Size: %d/%d\n", src.rows, src.cols );
   }
   Vec3b map(complex<float> c)
   {
