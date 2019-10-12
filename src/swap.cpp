@@ -40,8 +40,10 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
   {
+    float dstx = dst.real();
+    float dsty = dst.imag();
     if ( dsty > 0.5 || dsty < -0.5 ){
       return 0;
     }
@@ -57,7 +59,7 @@ public:
     }
     //recover angles
     cartesian2spherical(x,y,z, phi, theta);
-    return child->map( phi / M_PI, theta / M_PI );
+    return child->map( complex<float>(phi / M_PI, theta / M_PI) );
   }
 };
 
