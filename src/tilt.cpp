@@ -39,10 +39,12 @@ public:
     //fprintf( stderr, "%d\n", argc );
     child = plugin_load( argc, argv );
   }
-  uchar* map(float dstx, float dsty)
+  Vec3b map(complex<float> dst)
+
+  //uchar* map(float dstx, float dsty)
   {
-    float psi = dstx * M_PI;
-    float theta = dsty * M_PI;
+    float psi = dst.real() * M_PI;
+    float theta = dst.imag() * M_PI;
     float x = cos(theta)*cos(psi);
     float y = cos(theta)*sin(psi);
     float z = sin(theta);
@@ -60,7 +62,7 @@ public:
     if ( y1 < 0.0 ){
       psi1 = - psi1;
     }
-    return child->map( psi1/M_PI, theta1/M_PI );
+    return child->map( complex<float>(psi1/M_PI, theta1/M_PI) );
   }
 };
 

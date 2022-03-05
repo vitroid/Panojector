@@ -1,12 +1,18 @@
 UNAME := $(shell uname)
 ifeq "Darwin" "$(UNAME)"
+ifeq ("CONDA_PREFIX","")
 LDFLAGS=`pkg-config opencv4 --libs`
+INCLUDES=`pkg-config opencv4 --cflags`
+else
+LDFLAGS:=`pkg-config $(CONDA_PREFIX)/lib/pkgconfig/opencv4.pc --libs` -Xlinker -rpath -Xlinker $(CONDA_PREFIX)/lib
+INCLUDES:=`pkg-config $(CONDA_PREFIX)/lib/pkgconfig/opencv4.pc --cflags`
+endif
 endif
 ifeq "Linux" "$(UNAME)"
 LDFLAGS=-lcv -lhighgui
 endif
-CXX=g++ -O3 -Isrc `pkg-config opencv4 --cflags` -std=c++11
-SO=load.so rotate.so userfunc.so scale.so log.so invert.so slide.so exponential.so tile.so mer2equ.so equ2ste.so tile2.so swap.so # grid4.so saru.so box.so power.so ribbon.so equ2mer.so mer2equ.so tilt.so tumblerfan.so equ2ste.so prism.so cone.so interpolate.so er_ripple.so cyl2equ.so equ2cyl.so
+CXX=g++ -O3 -Isrc $(INCLUDES) -std=c++11
+SO=load.so rotate.so userfunc.so scale.so log.so invert.so slide.so exponential.so tile.so mer2equ.so equ2ste.so tile2.so swap.so equ2mer.so tilt.so # grid4.so saru.so box.so power.so ribbon.so equ2mer.so mer2equ.so tilt.so tumblerfan.so equ2ste.so prism.so cone.so interpolate.so er_ripple.so cyl2equ.so equ2cyl.so
 TARGETS=panojector $(SO)
 all: $(TARGETS)
 clean:
